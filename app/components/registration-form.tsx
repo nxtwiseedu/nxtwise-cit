@@ -12,7 +12,13 @@ import {
 import { Label } from "./ui/label";
 import Image from "next/image";
 import { Check } from "lucide-react";
-import { collection, addDoc } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  serverTimestamp,
+  FieldValue,
+  Timestamp,
+} from "firebase/firestore";
 import { db } from "../../lib/firebase"; // Ensure this path matches your firebase config file location
 import { toast } from "sonner"; // Optional but recommended for notifications
 
@@ -25,6 +31,12 @@ interface FormData {
   branch: string;
   year: string;
   domainInterested: string;
+}
+
+interface SubmissionData extends FormData {
+  createdAt: FieldValue | Timestamp;
+  applicationDate: FieldValue | Timestamp;
+  status: string;
 }
 
 interface Step {
@@ -107,19 +119,18 @@ export default function RegistrationForm() {
     setIsSubmitting(true);
 
     try {
-      const submissionData = {
+      const submissionData: SubmissionData = {
         ...formData,
-        createdAt: new Date().toISOString(),
+        createdAt: serverTimestamp(),
+        applicationDate: serverTimestamp(),
         status: "pending",
       };
 
-      // Add document to Firestore
       const docRef = await addDoc(
         collection(db, "registrations"),
         submissionData
       );
 
-      // Redirect to success page with registration ID
       window.location.href = `/registration-success?id=${docRef.id}`;
     } catch (error) {
       console.error("Error submitting form:", error);
