@@ -2,7 +2,19 @@ import { Card, CardContent } from "./ui/card";
 import Image from "next/image";
 import { Check, X } from "lucide-react";
 
-const domains = [
+interface Domain {
+  name: string;
+  icon: string;
+}
+
+interface Feature {
+  name: string;
+  nonQualified: boolean;
+  qualifiedNotEnrolled: boolean;
+  qualifiedEnrolled: boolean;
+}
+
+const domains: Domain[] = [
   { name: "Full Stack Web Development", icon: "/logos/web-dev.svg" },
   { name: "Cyber Security", icon: "/logos/security.svg" },
   { name: "Machine Learning", icon: "/logos/ml.svg" },
@@ -18,7 +30,7 @@ const domains = [
   { name: "Digital Marketing", icon: "/logos/marketing.svg" },
 ];
 
-const features = [
+const features: Feature[] = [
   {
     name: "CIT participation certificate",
     nonQualified: true,
@@ -104,7 +116,7 @@ export function DomainGrid() {
             Exclusive benefits CIT qualified students get after enrolling for an
             Internship
           </h2>
-          <div className="overflow-auto">
+          <div className="overflow-auto scrollbar-thin scrollbar-thumb-[#004aad] scrollbar-track-gray-200 scrollbar-thumb-rounded-full scrollbar-track-rounded-full hover:scrollbar-thumb-[#003a8a]">
             <div className="min-w-[768px] bg-white rounded-lg shadow-md">
               <table className="w-full">
                 <thead>
