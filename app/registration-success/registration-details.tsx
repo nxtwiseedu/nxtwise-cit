@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, Timestamp } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
@@ -19,7 +19,7 @@ interface RegistrationData {
   branch: string;
   year: string;
   domainInterested: string;
-  createdAt: string;
+  createdAt: Timestamp;
   status: string;
 }
 
@@ -84,7 +84,15 @@ export default function RegistrationSuccess() {
       ["Domain Interested", registrationData.domainInterested],
       [
         "Registration Date",
-        new Date(registrationData.createdAt).toLocaleDateString(),
+        registrationData.createdAt.toDate().toLocaleString("en-IN", {
+          day: "2-digit",
+          month: "long",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true,
+          timeZone: "Asia/Kolkata",
+        }),
       ],
     ];
 
