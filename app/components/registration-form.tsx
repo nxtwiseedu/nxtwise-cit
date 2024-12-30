@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -19,8 +20,8 @@ import {
   FieldValue,
   Timestamp,
 } from "firebase/firestore";
-import { db } from "../../lib/firebase"; // Ensure this path matches your firebase config file location
-import { toast } from "sonner"; // Optional but recommended for notifications
+import { db } from "../../lib/firebase";
+import { toast } from "sonner";
 
 interface FormData {
   fullName: string;
@@ -130,7 +131,6 @@ export default function RegistrationForm() {
         collection(db, "registrations"),
         submissionData
       );
-
       window.location.href = `/registration-success?id=${docRef.id}`;
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -166,11 +166,15 @@ export default function RegistrationForm() {
               <div key={field} className="space-y-2">
                 <Label
                   htmlFor={field}
-                  className="text-sm font-semibold text-gray-700"
+                  className="text-sm font-semibold text-[#004aad]"
                 >
-                  Year
+                  Year *
                 </Label>
-                <Select onValueChange={handleYearChange} value={formData.year}>
+                <Select
+                  onValueChange={handleYearChange}
+                  value={formData.year}
+                  required
+                >
                   <SelectTrigger className="w-full rounded-lg border-gray-200">
                     <SelectValue placeholder="Select your year" />
                   </SelectTrigger>
@@ -191,13 +195,14 @@ export default function RegistrationForm() {
               <div key={field} className="space-y-2">
                 <Label
                   htmlFor={field}
-                  className="text-sm font-semibold text-gray-700"
+                  className="text-sm font-semibold text-[#004aad]"
                 >
-                  Domain Interested
+                  Domain Interested *
                 </Label>
                 <Select
                   onValueChange={handleDomainChange}
                   value={formData.domainInterested}
+                  required
                 >
                   <SelectTrigger className="w-full rounded-lg border-gray-200">
                     <SelectValue placeholder="Select your preferred domain" />
@@ -218,13 +223,20 @@ export default function RegistrationForm() {
             <div key={field} className="space-y-2">
               <Label
                 htmlFor={field}
-                className="text-sm font-semibold text-gray-700"
+                className="text-sm font-semibold text-[#004aad]"
               >
                 {field.charAt(0).toUpperCase() +
-                  field.slice(1).replace(/([A-Z])/g, " $1")}
+                  field.slice(1).replace(/([A-Z])/g, " $1")}{" "}
+                *
               </Label>
               <Input
-                type={field === "email" ? "email" : "text"}
+                type={
+                  field === "email"
+                    ? "email"
+                    : field.includes("Number")
+                    ? "tel"
+                    : "text"
+                }
                 id={field}
                 name={field}
                 value={formData[field]}
@@ -238,6 +250,7 @@ export default function RegistrationForm() {
                     .toLowerCase()
                 }`}
                 required
+                pattern={field.includes("Number") ? "\\d{10}" : undefined}
               />
             </div>
           );
