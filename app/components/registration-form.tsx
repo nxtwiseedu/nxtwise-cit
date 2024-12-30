@@ -12,6 +12,9 @@ import {
 import { Label } from "./ui/label";
 import Image from "next/image";
 import { Check } from "lucide-react";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../../lib/firebase"; // Ensure this path matches your firebase config file location
+import { toast } from "sonner"; // Optional but recommended for notifications
 
 interface FormData {
   fullName: string;
@@ -58,6 +61,7 @@ type YearOption = (typeof yearOptions)[number];
 
 export default function RegistrationForm() {
   const [currentStep, setCurrentStep] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
     email: "",
@@ -82,12 +86,46 @@ export default function RegistrationForm() {
     setFormData((prevData) => ({ ...prevData, year: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const validateForm = (): boolean => {
+    const currentFields = steps[currentStep - 1].fields;
+    return currentFields.every((field) => formData[field] !== "");
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (currentStep === steps.length) {
-      console.log("Form submitted:", formData);
-    } else {
+
+    if (!validateForm()) {
+      toast.error("Please fill in all fields before proceeding");
+      return;
+    }
+
+    if (currentStep < steps.length) {
       setCurrentStep((prev) => prev + 1);
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const submissionData = {
+        ...formData,
+        createdAt: new Date().toISOString(),
+        status: "pending",
+      };
+
+      // Add document to Firestore
+      const docRef = await addDoc(
+        collection(db, "registrations"),
+        submissionData
+      );
+
+      // Redirect to success page with registration ID
+      window.location.href = `/registration-success?id=${docRef.id}`;
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast.error("Error submitting form. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -188,6 +226,7 @@ export default function RegistrationForm() {
                     .replace(/([A-Z])/g, " $1")
                     .toLowerCase()
                 }`}
+                required
               />
             </div>
           );
@@ -259,6 +298,7 @@ export default function RegistrationForm() {
                   type="button"
                   onClick={() => setCurrentStep((prev) => prev - 1)}
                   className="flex-1 bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  disabled={isSubmitting}
                 >
                   Back
                 </Button>
@@ -266,8 +306,13 @@ export default function RegistrationForm() {
               <Button
                 type="submit"
                 className="flex-1 bg-[#004aad] text-white hover:bg-[#003a8a]"
+                disabled={isSubmitting}
               >
-                {currentStep === steps.length ? "Submit" : "Next"}
+                {isSubmitting
+                  ? "Submitting..."
+                  : currentStep === steps.length
+                  ? "Submit"
+                  : "Next"}
               </Button>
             </div>
           </form>
