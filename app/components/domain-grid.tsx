@@ -20,49 +20,43 @@ const domains = [
 
 const features = [
   {
-    name: "CIT Participation Certificate",
+    name: "CIT participation certificate",
     nonQualified: true,
     qualifiedNotEnrolled: true,
     qualifiedEnrolled: true,
   },
   {
-    name: "AI Career Roadmap",
+    name: "Career roadmap",
     nonQualified: true,
     qualifiedNotEnrolled: true,
     qualifiedEnrolled: true,
   },
   {
-    name: "Skill Assessment Certificates",
-    nonQualified: true,
-    qualifiedNotEnrolled: true,
-    qualifiedEnrolled: true,
-  },
-  {
-    name: "Guaranteed Training & Internship Program",
+    name: "Guaranteed training & internship program",
     nonQualified: false,
     qualifiedNotEnrolled: false,
     qualifiedEnrolled: true,
   },
   {
-    name: "Offer Letter",
+    name: "Internship confirmation letter",
     nonQualified: false,
     qualifiedNotEnrolled: false,
     qualifiedEnrolled: true,
   },
   {
-    name: "Training & Internship Certificate",
+    name: "Training & internship certificate",
     nonQualified: false,
     qualifiedNotEnrolled: false,
     qualifiedEnrolled: true,
   },
   {
-    name: "Exclusive Hiring Portal Access",
+    name: "Exclusive hiring portal access",
     nonQualified: false,
     qualifiedNotEnrolled: false,
     qualifiedEnrolled: true,
   },
   {
-    name: "Lifetime Access",
+    name: "Lifetime LMS access",
     nonQualified: false,
     qualifiedNotEnrolled: false,
     qualifiedEnrolled: true,
@@ -106,9 +100,9 @@ export function DomainGrid() {
       {/* Features Comparison Section */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-[#FF6B35]">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-[#004aad]">
             Exclusive benefits CIT qualified students get after enrolling for an
-            Internship.
+            Internship
           </h2>
           <div className="overflow-auto">
             <div className="min-w-[768px] bg-white rounded-lg shadow-md">

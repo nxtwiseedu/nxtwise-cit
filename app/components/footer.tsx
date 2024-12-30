@@ -37,15 +37,18 @@ export function Footer() {
             <ul className="space-y-3">
               <li className="flex items-center gap-2 text-gray-600 text-sm">
                 <MapPin className="h-4 w-4 text-[#004aad]" />
-                <span>123 Education Street, Tech City</span>
+                <span>
+                  4th floor, above Galaxy Dental Care, Kondapur, opp. Harsha
+                  Toyota, Hyderabad - 500084{" "}
+                </span>
               </li>
               <li className="flex items-center gap-2 text-gray-600 text-sm">
                 <Phone className="h-4 w-4 text-[#004aad]" />
-                <span>+91 98765 43210</span>
+                <span>+91-8073418832</span>
               </li>
               <li className="flex items-center gap-2 text-gray-600 text-sm">
                 <Mail className="h-4 w-4 text-[#004aad]" />
-                <span>contact@edzeeta.com</span>
+                <span>support@edzeeta.com</span>
               </li>
             </ul>
           </div>
