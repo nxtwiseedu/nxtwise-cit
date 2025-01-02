@@ -15,7 +15,7 @@ export function EnrollmentNotifications() {
 
       toast({
         title: "New Registration! 🎉",
-        description: `${enrollment.name} has registered for Common Internship Test(CIT-2025)!`,
+        description: `${enrollment.name} has registered for Common Internship Test!`,
         duration: 6000,
         className: `
           bg-white 
