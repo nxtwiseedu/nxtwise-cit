@@ -5,10 +5,16 @@ import { DomainGrid } from "./components/domain-grid";
 import { ImportantDates } from "./components/important-dates";
 import { Footer } from "./components/footer";
 import Link from "next/link";
+import { EnrollmentNotifications } from "./components/EnrollmentNotifications";
+import { Toaster } from "sonner";
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col">
+      {/* Enrollment notifications */}
+      <EnrollmentNotifications />
+      {/* Toast container - place it at root level */}
+      <Toaster />
       {/* Hero Section */}
       <section className="bg-white">
         <div className="container mx-auto px-4 py-8 md:py-16">
