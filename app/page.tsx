@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "./components/ui/button";
 import Image from "next/image";
 import { CompanyLogos } from "./components/company-logos";
@@ -7,6 +9,7 @@ import { Footer } from "./components/footer";
 import Link from "next/link";
 import { EnrollmentNotifications } from "./components/EnrollmentNotifications";
 import { Toaster } from "sonner";
+import { ExamFormat } from "./components/exam-format";
 
 export default function Home() {
   return (
@@ -63,6 +66,7 @@ export default function Home() {
         </div>
       </section>
       <ImportantDates />
+      <ExamFormat />
       <DomainGrid />
       <CompanyLogos />
       <Footer />
