@@ -1,7 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import { doc, getDoc, Timestamp } from "firebase/firestore";
-import { db } from "@/lib/firebase";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { Button } from "../components/ui/button";
@@ -19,8 +17,9 @@ interface RegistrationData {
   branch: string;
   year: string;
   domainInterested: string;
-  createdAt: Timestamp;
+  createdAt: string;
   status: string;
+  timestamp: string;
 }
 
 export default function RegistrationSuccess() {
@@ -29,20 +28,29 @@ export default function RegistrationSuccess() {
   const [registrationData, setRegistrationData] =
     useState<RegistrationData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchRegistrationData = async () => {
-      if (!registrationId) return;
+      if (!registrationId) {
+        setError("Registration ID is missing");
+        setLoading(false);
+        return;
+      }
 
       try {
-        const docRef = doc(db, "registrations", registrationId);
-        const docSnap = await getDoc(docRef);
-
-        if (docSnap.exists()) {
-          setRegistrationData(docSnap.data() as RegistrationData);
+        const response = await fetch(
+          `/api/get-registration?id=${registrationId}`
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch registration data");
         }
+
+        const data = await response.json();
+        setRegistrationData(data.registrationData);
       } catch (error) {
         console.error("Error fetching registration data:", error);
+        setError("Failed to fetch registration data");
       } finally {
         setLoading(false);
       }
@@ -58,7 +66,7 @@ export default function RegistrationSuccess() {
     const page = pdfDoc.addPage([595.276, 841.89]); // A4 size
     const { height } = page.getSize();
 
-    // Add logo placeholder (you would need to handle actual logo embedding differently)
+    // Add logo placeholder
     page.drawText("Edzeeta", {
       x: 50,
       y: height - 50,
@@ -82,18 +90,7 @@ export default function RegistrationSuccess() {
       ["Branch", registrationData.branch],
       ["Year", registrationData.year],
       ["Domain Interested", registrationData.domainInterested],
-      [
-        "Registration Date",
-        registrationData.createdAt.toDate().toLocaleString("en-IN", {
-          day: "2-digit",
-          month: "long",
-          year: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: true,
-          timeZone: "Asia/Kolkata",
-        }),
-      ],
+      ["Registration Date", registrationData.timestamp],
     ];
 
     let yOffset = height - 150;
@@ -130,12 +127,12 @@ export default function RegistrationSuccess() {
     );
   }
 
-  if (!registrationData) {
+  if (error || !registrationData) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-800 mb-4">
-            Registration not found
+            {error || "Registration not found"}
           </h1>
           <Link href="/">
             <Button className="bg-[#004aad] text-white hover:bg-[#003a8a]">

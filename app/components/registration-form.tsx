@@ -13,14 +13,7 @@ import {
 import { Label } from "./ui/label";
 import Image from "next/image";
 import { Check } from "lucide-react";
-import {
-  collection,
-  addDoc,
-  serverTimestamp,
-  FieldValue,
-  Timestamp,
-} from "firebase/firestore";
-import { db } from "../../lib/firebase";
+
 import { toast } from "sonner";
 
 interface FormData {
@@ -32,12 +25,6 @@ interface FormData {
   branch: string;
   year: string;
   domainInterested: string;
-}
-
-interface SubmissionData extends FormData {
-  createdAt: FieldValue | Timestamp;
-  applicationDate: FieldValue | Timestamp;
-  status: string;
 }
 
 interface Step {
@@ -120,18 +107,24 @@ export default function RegistrationForm() {
     setIsSubmitting(true);
 
     try {
-      const submissionData: SubmissionData = {
-        ...formData,
-        createdAt: serverTimestamp(),
-        applicationDate: serverTimestamp(),
-        status: "pending",
-      };
+      const response = await fetch("/api/submit-registration", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          applicationDate: new Date().toISOString(),
+          status: "pending",
+        }),
+      });
 
-      const docRef = await addDoc(
-        collection(db, "registrations"),
-        submissionData
-      );
-      window.location.href = `/registration-success?id=${docRef.id}`;
+      if (!response.ok) {
+        throw new Error("Submission failed");
+      }
+
+      const data = await response.json();
+      window.location.href = `/registration-success?id=${data.id}`;
     } catch (error) {
       console.error("Error submitting form:", error);
       toast.error("Error submitting form. Please try again.");
