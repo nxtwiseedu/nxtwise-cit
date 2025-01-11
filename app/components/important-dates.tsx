@@ -23,7 +23,7 @@ const dates = [
   },
   {
     title: "Internship Training Batch",
-    date: "06th January, 2025 onwards",
+    date: "12th January, 2025 onwards",
     icon: Clock,
   },
 ];
