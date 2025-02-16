@@ -8,7 +8,7 @@ import Link from "next/link";
 const dates = [
   {
     title: "Registration Starts",
-    date: "15th December, 2024",
+    date: "1st February, 2025",
     icon: Calendar,
   },
   {
