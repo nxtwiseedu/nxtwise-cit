@@ -18,7 +18,7 @@ const dates = [
   },
   {
     title: "CIT Exam Date",
-    date: "18th May, 2025",
+    date: "19th May, 2025",
     icon: Calendar,
   },
   {
