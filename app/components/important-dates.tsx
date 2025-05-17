@@ -8,7 +8,7 @@ import Link from "next/link";
 const dates = [
   {
     title: "Registration Starts",
-    date: "1st February, 2025",
+    date: "15th May, 2025",
     icon: Calendar,
   },
   {
@@ -18,7 +18,7 @@ const dates = [
   },
   {
     title: "CIT Exam Date",
-    date: "25th February, 2025",
+    date: "18th May, 2025",
     icon: Calendar,
   },
   {
