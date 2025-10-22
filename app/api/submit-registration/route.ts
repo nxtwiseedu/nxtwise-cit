@@ -53,6 +53,7 @@ export async function POST(request: NextRequest) {
         formData.branch,
         formData.year,
         formData.domainInterested,
+        formData.whatsappConsent ? "Yes" : "No",
         "pending", // Status
         "", // Reserved for admin notes
         currentTime.split(",")[0], // Just the date part for easy filtering
@@ -63,7 +64,7 @@ export async function POST(request: NextRequest) {
     // First, let's check if headers exist
     const checkHeaders = await sheets.spreadsheets.values.get({
       spreadsheetId: process.env.GOOGLE_SHEETS_SPREADSHEET_ID,
-      range: "Sheet1!A1:M1",
+      range: "Sheet1!A1:N1", // <-- expanded
     });
 
     // If no headers, let's add them
@@ -73,7 +74,7 @@ export async function POST(request: NextRequest) {
     ) {
       await sheets.spreadsheets.values.update({
         spreadsheetId: process.env.GOOGLE_SHEETS_SPREADSHEET_ID,
-        range: "Sheet1!A1:M1",
+        range: "Sheet1!A1:N1",
         valueInputOption: "USER_ENTERED",
         requestBody: {
           values: [
@@ -87,6 +88,7 @@ export async function POST(request: NextRequest) {
               "Branch",
               "Year",
               "Domain Interested",
+              "WhatsApp Consent",
               "Status",
               "Admin Notes",
               "Date Only",
@@ -100,7 +102,7 @@ export async function POST(request: NextRequest) {
     // Append the data to your sheet
     const response = await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.GOOGLE_SHEETS_SPREADSHEET_ID,
-      range: "Sheet1!A:M", // Extended range to include all columns
+      range: "Sheet1!A:N", // Extended range to include all columns
       valueInputOption: "USER_ENTERED",
       insertDataOption: "INSERT_ROWS",
       requestBody: {
@@ -143,8 +145,8 @@ export async function POST(request: NextRequest) {
               repeatCell: {
                 range: {
                   sheetId: 0,
-                  startColumnIndex: 11,
-                  endColumnIndex: 12,
+                  startColumnIndex: 12,
+                  endColumnIndex: 13,
                 },
                 cell: {
                   userEnteredFormat: {

@@ -25,6 +25,7 @@ interface FormData {
   branch: string;
   year: string;
   domainInterested: string;
+  whatsappConsent: boolean;
 }
 
 interface Step {
@@ -71,6 +72,7 @@ export default function RegistrationForm() {
     branch: "",
     year: "",
     domainInterested: "",
+    whatsappConsent: false,
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -232,7 +234,7 @@ export default function RegistrationForm() {
                 }
                 id={field}
                 name={field}
-                value={formData[field]}
+                value={String(formData[field] ?? "")}
                 onChange={handleChange}
                 className="w-full rounded-lg border-gray-200"
                 placeholder={`Enter your ${
@@ -308,6 +310,34 @@ export default function RegistrationForm() {
         <div className="bg-white shadow-xl rounded-2xl p-6 md:p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             {renderFormFields()}
+
+            {currentStep === steps.length && (
+              <div className="flex items-start space-x-2 pt-4">
+                <input
+                  type="checkbox"
+                  id="whatsappConsent"
+                  checked={formData.whatsappConsent}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      whatsappConsent: e.target.checked,
+                    }))
+                  }
+                  className="mt-1 w-4 h-4 text-[#004aad] border-gray-300 rounded"
+                  required
+                />
+                <Label
+                  htmlFor="whatsappConsent"
+                  className="text-sm text-gray-700"
+                >
+                  I agree to receive messages from{" "}
+                  <span className="font-semibold text-[#004aad]">
+                    NxtWise IT Private Limited
+                  </span>{" "}
+                  on WhatsApp.
+                </Label>
+              </div>
+            )}
 
             <div className="flex gap-4 pt-6">
               {currentStep > 1 && (
