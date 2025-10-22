@@ -29,7 +29,7 @@ export function Footer() {
               <li className="flex items-center gap-2 text-gray-600 text-sm">
                 <MapPin className="h-4 w-4 text-[#004aad]" />
                 <span>
-                  4th Floor, Volam's Elite, Plot No 98, Seshadri Marg, opp.
+                  4th Floor, Volam&apos;s Elite, Plot No 98, Seshadri Marg, opp.
                   Ratnadeep supermarket, Kondapur, Raja Rajeshwara Nagar,
                   Hyderabad, Telangana 500084
                 </span>
