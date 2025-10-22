@@ -19,8 +19,8 @@ export function Footer() {
           {/* Company Info */}
           <div className="space-y-4">
             <Image
-              src="/logos/EdzeetaBigLogo.svg"
-              alt="Edzeeta Logo"
+              src="/logos/nxtwise-logo.png"
+              alt="nxtwise Logo"
               width={150}
               height={50}
               className="object-contain"
@@ -38,17 +38,18 @@ export function Footer() {
               <li className="flex items-center gap-2 text-gray-600 text-sm">
                 <MapPin className="h-4 w-4 text-[#004aad]" />
                 <span>
-                  4th floor, above Galaxy Dental Care, Kondapur, opp. Harsha
-                  Toyota, Hyderabad - 500084{" "}
+                  4th Floor, Volam's Elite, Plot No 98, Seshadri Marg, opp.
+                  Ratnadeep supermarket, Kondapur, Raja Rajeshwara Nagar,
+                  Hyderabad, Telangana 500084
                 </span>
               </li>
               <li className="flex items-center gap-2 text-gray-600 text-sm">
                 <Phone className="h-4 w-4 text-[#004aad]" />
-                <span>+91-8073418832</span>
+                <span>+91-8341886054</span>
               </li>
               <li className="flex items-center gap-2 text-gray-600 text-sm">
                 <Mail className="h-4 w-4 text-[#004aad]" />
-                <span>support@edzeeta.com</span>
+                <span>updates@nxtwise.in</span>
               </li>
             </ul>
           </div>
@@ -61,29 +62,14 @@ export function Footer() {
             <div className="flex gap-4">
               {[
                 {
-                  icon: Youtube,
-                  label: "YouTube",
-                  href: "https://www.youtube.com/@EdZeeta",
-                },
-                {
                   icon: Instagram,
                   label: "Instagram",
-                  href: "https://instagram.com/edzeeta",
+                  href: "https://instagram.com/nxtwise",
                 },
                 {
                   icon: Linkedin,
                   label: "LinkedIn",
-                  href: "https://www.linkedin.com/company/edzeetalearning/",
-                },
-                {
-                  icon: Facebook,
-                  label: "Facebook",
-                  href: "https://www.facebook.com/profile.php?id=61552097862102",
-                },
-                {
-                  icon: Twitter,
-                  label: "Twitter",
-                  href: "https://twitter.com/EdZeetaLearning/",
+                  href: "https://www.linkedin.com/company/nxtwise/",
                 },
               ].map((social) => (
                 <Link

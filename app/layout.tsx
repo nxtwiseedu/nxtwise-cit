@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Edzeeta CIT",
-  description: "Edzeeta's website to register for Common Internship Test",
+  title: "nxtwise CIT",
+  description: "nxtwise's website to register for Common Internship Test",
 };
 
 export default function RootLayout({

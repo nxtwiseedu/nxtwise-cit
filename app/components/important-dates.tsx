@@ -67,7 +67,7 @@ export function ImportantDates() {
             <CardContent className="flex flex-col items-center text-center space-y-8">
               <div className="w-40 h-40 relative">
                 <Image
-                  src={cit}
+                  src="/logos/cit-logo.png"
                   alt="CIT Logo"
                   fill
                   className="object-contain"

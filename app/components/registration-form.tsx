@@ -258,8 +258,8 @@ export default function RegistrationForm() {
         {/* Header Section */}
         <div className="text-center mb-12">
           <Image
-            src="/logos/EdzeetaBigLogo.svg"
-            alt="Edzeeta Logo"
+            src="/logos/nxtwise-logo.png"
+            alt="nxtwise Logo"
             width={180}
             height={60}
             className="mx-auto mb-8"

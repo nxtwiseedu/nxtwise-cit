@@ -23,16 +23,8 @@ export default function Home() {
         <div className="container mx-auto px-4 py-8 md:py-16">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
             <Image
-              src="/logos/EdzeetaBigLogo.svg"
+              src="/logos/nxtwise-logo.png"
               alt="Dzeeta Logo"
-              width={150}
-              height={150}
-              className="object-contain"
-              priority
-            />
-            <Image
-              src="/logos/OfficialPartner.svg"
-              alt="Official Partner"
               width={150}
               height={150}
               className="object-contain"
