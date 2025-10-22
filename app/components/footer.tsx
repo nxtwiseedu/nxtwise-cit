@@ -81,7 +81,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="mt-8 pt-6 border-t border-gray-200">
           <p className="text-center text-sm text-gray-600">
-            &copy; 2025 Edzeeta. All rights reserved.
+            &copy; 2025 Nxtwise. All rights reserved.
           </p>
         </div>
       </div>

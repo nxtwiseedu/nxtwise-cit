@@ -67,7 +67,7 @@ export default function RegistrationSuccess() {
     const { height } = page.getSize();
 
     // Add logo placeholder
-    page.drawText("Edzeeta", {
+    page.drawText("Nxtwise", {
       x: 50,
       y: height - 50,
       size: 24,
@@ -111,7 +111,7 @@ export default function RegistrationSuccess() {
     });
 
     const pdfBytes = await pdfDoc.save();
-    const blob = new Blob([pdfBytes], { type: "application/pdf" });
+    const blob = new Blob([pdfBytes as any], { type: "application/pdf" });
     const url = window.URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
@@ -150,8 +150,8 @@ export default function RegistrationSuccess() {
         {/* Header */}
         <div className="text-center mb-12">
           <Image
-            src="/logos/EdzeetaBigLogo.svg"
-            alt="Edzeeta Logo"
+            src="/logos/nxtwise-logo.png"
+            alt="Nxtwise Logo"
             width={180}
             height={60}
             className="mx-auto mb-8"
