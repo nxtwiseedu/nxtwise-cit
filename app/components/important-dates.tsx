@@ -1,7 +1,6 @@
 import { Card, CardContent } from "./ui/card";
 import { Button } from "./ui/button";
 import { Calendar, Clock, Users } from "lucide-react";
-import cit from "../../public/logos/cit.svg";
 import Image from "next/image";
 import Link from "next/link";
 
